@@ -5,15 +5,33 @@
  *
  * @returns object with the comment format inside the function.
  */
+
+const map = {
+  monday: 1,
+  tuesday: 2,
+  wednesday: 3,
+  thursday: 4,
+  friday: 5,
+  saturday: 6,
+  sunday: 7,
+};
+
 function workingHoursProxy(workingHours) {
-  // TODO: Implement here
-  //
-  //
-  // return {
-  //   "Saturday": ["9:00-14:00", "16:00-22:00"],
-  //   "Sunday": ["9:00-16:00"],
-  //   "Friday": ["9:00-22:00"]
-  // }
+    return arr
+      .sort((a, b) => {
+        return map[a.day_of_week] - map[b.day_of_week];
+      })
+      .reduce((prev, curr) => {
+        return {
+          ...prev,
+          [curr.day_of_week]: prev[curr.day_of_week]
+            ? [
+                ...prev[curr.day_of_week],
+                `${curr.start_time} - ${curr.end_time}`,
+              ]
+            : [`${curr.start_time} - ${curr.end_time}`],
+        };
+      }, {});
 }
 
 // const workingHours = [
